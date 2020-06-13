@@ -1,0 +1,15 @@
+---
+    - hosts: all
+      become: yes
+
+      pre_tasks:
+        - name: Update apt
+          apt: update_cache=yes cache_valid_time=3600
+
+      tasks:
+        - name: Install Bind utils (required for dig)
+          apt:
+            name:
+                - bind9
+                - bind9utils
+            state: present
